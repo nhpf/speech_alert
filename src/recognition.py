@@ -33,6 +33,7 @@ def brief_test(calibrate: bool = False) -> None:
         if calibrate:
             mic.adjust_for_ambient_noise(audio_source)
             print("Calibration Done")
+        print("Start Speaking:\n")
         # Capture phrase and recognize it
         captured_phrase = mic.listen(audio_source)
         recognize_audio_segment(mic, captured_phrase)
@@ -46,7 +47,8 @@ def recognize_audio_forever(async_callback: Callable, keywords: List[str], calib
     with microphone as source:
         if calibrate:
             speech_recognizer.adjust_for_ambient_noise(source)
-            print("Calibration Done.\n")
+            print("Calibration Done.")
+        print("Start Speaking:\n")
 
         # Forever
         while True:

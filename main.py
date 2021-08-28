@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
-from discord_bot import send_alert
-from recognition import recognize_audio_forever
+from src.discord_bot import send_alert
+from src.recognition import recognize_audio_forever
 from project_variables import *
 
 
