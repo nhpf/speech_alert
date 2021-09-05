@@ -1,24 +1,33 @@
 #!/usr/bin/env python3
 import discord
 import threading
-from project_variables import DISCORD_BOT_TOKEN, DISCORD_USER_ID, ALERT_MESSAGE
-
-intents = discord.Intents.default()
-intents.members = True
-client = discord.Client(intents=intents)
-notified_user = None
 
 
-@client.event
-async def on_ready():
-    global notified_user
-    notified_user = client.get_user(int(DISCORD_USER_ID))
-    await notified_user.send('Online!')
+class DiscordNotifierClient(discord.Client):
+    def __init__(self, discord_intents: discord.Intents, discord_user_id: int):
+        super().__init__(intents=discord_intents)
+        self.discord_user_id = discord_user_id
+        self.notified_user = None
+
+    async def on_ready(self):
+        self.notified_user = self.get_user(self.discord_user_id)
+        await self.notified_user.send('Online!')
+
+    async def send_alert(self, alert_message: str) -> None:
+        await self.notified_user.send(alert_message)
 
 
-async def send_alert() -> None:
-    await notified_user.send(ALERT_MESSAGE)
+class DiscordNotifierBot(discord.Client):
+    def __init__(self, discord_user_id: int):
+        super().__init__()
+        intents = discord.Intents.default()
+        intents.members = True
+        self.client = DiscordNotifierClient(discord_intents=intents, discord_user_id=discord_user_id)
+        self.notified_user = self
 
 
-run_thread = threading.Thread(target=client.run, args=(DISCORD_BOT_TOKEN,))
-run_thread.start()
+def start_bot(bot_token: str, user_id: int):
+    bot = DiscordNotifierBot(user_id)
+    run_thread = threading.Thread(target=bot.client.run, args=(bot_token,))
+    run_thread.start()
+    return bot

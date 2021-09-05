@@ -3,3 +3,4 @@ __pycache__/
 speech_env/
 *.whl
 *.log
+*.txt
