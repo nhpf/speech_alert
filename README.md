@@ -3,7 +3,7 @@
 An idea proposed by @gpizzigh, this script enables your microphone and notifies you on Discord when a keyword is identified.
 
 
-####Windows Users
+#### Windows Users
  - Go to the "Releases" section on the right and download the most recent zip file
  - Ignore the "Environment Setup" section
  - To hear audio **coming from your PC** instead of a microphone, enable [Stereo Mix](https://thegeekpage.com/stereo-mix/)
@@ -11,7 +11,7 @@ An idea proposed by @gpizzigh, this script enables your microphone and notifies 
 
 ---
 
-####Environment Setup
+#### Environment Setup
  - Clone this repository, and make sure you have [Python 3](https://www.python.org/) installed
  - Run `pip install -r requirements.txt`
      - On Windows, if an error occurs when trying to install PyAudio, [download the wheel](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio) compatible with your system and run `pip install [file_name.whl]`
@@ -23,9 +23,9 @@ An idea proposed by @gpizzigh, this script enables your microphone and notifies 
 
 ---
 
-####Troubleshooting
+#### Troubleshooting
  - **Bot Token**
-    - If you are using someone else's bot, as them for the Bot Token. If you are on your own, then you have to create your own bot (follow the steps below):
+    - If you are using someone else's bot, ask them for the Bot Token. If you are on your own, then you have to create your own bot (follow the steps below):
     - On [Discord developer portal](https://discord.com/developers/) Go to "Applications" and select/create your bot
     - Then, go to Bot, scroll to 'Privileged Gateway Intents' and enable 'SERVER MEMBERS INTENT' (toggle switch)
     - On the same page, next to the ICON section, copy the application token
