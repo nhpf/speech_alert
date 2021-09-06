@@ -1,6 +1,10 @@
 .idea/
 __pycache__/
 speech_env/
+build/
+dist/
 *.whl
 *.log
 *.txt
+*.spec
+*.ico

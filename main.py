@@ -25,8 +25,8 @@ if __name__ == '__main__':
         with open(discord_secret_file_path, 'w', encoding='utf-8') as discord_secret_file:
             try:
                 discord_bot_token = input('\tBOT TOKEN: ')
-                discord_user_id = input('\tYOUR USER ID: ')
-                discord_secret_file.writelines([discord_bot_token, '\n', discord_user_id])
+                discord_user_id = int(input('\tYOUR USER ID: '))
+                discord_secret_file.writelines([discord_bot_token, '\n', str(discord_user_id)])
             except Exception as e:
                 input(f'{e}\nError while writing credentials file. Restart the program.')
                 exit()
@@ -37,13 +37,14 @@ if __name__ == '__main__':
     # Set Recognition variables
     language_code = input('\nAudio Language (e.g. en-US, pt-PT) [Defaults to en-US]: ').strip()
     alert_message = input('What message should be sent to you? [Defaults to "ALERT!"]: ').strip()
-    calibrate = input('Do you want to calibrate before listening (you should be silent while calibrating) [y/N]: ') in 'yY'
-    max_phrase_duration = input('Maximum duration (in seconds) of each phrase [Defaults to 10]: ')
+    calibrate = input('Do you want to calibrate before listening (you should be silent while calibrating) [y/N]: ').strip()
+    max_phrase_duration = input('Maximum duration (in seconds) of each phrase [Defaults to 10]: ').strip()
 
     if len(language_code) < 1:
         language_code = 'en-US'
     if len(alert_message) < 1:
         alert_message = 'ALERT!'
+    calibrate = (len(calibrate) >= 1) and ('yY' in calibrate.lower())
     if len(max_phrase_duration) < 1:
         max_phrase_duration = 10
     else:
@@ -57,7 +58,11 @@ if __name__ == '__main__':
     print('\nNow you need to choose which audio device to listen. If you are confused, read the instructions on Github.')
     for i in range(audio_module.get_device_count()):
         print(f'\t{audio_module.get_device_info_by_index(i)["index"]}: {audio_module.get_device_info_by_index(i)["name"]}')
-    audio_device_index = int(input('Selected audio device [press ENTER to use default]: '))
+    audio_device_index = input('Selected audio device [press ENTER to use default]: ').strip()
+    if len(audio_device_index) < 1:
+        audio_device_index = 0
+    else:
+        audio_device_index = int(audio_device_index)
 
     # Set keywords
     print(f'\nNow you need to input the set of words that will trigger a discord notification.'

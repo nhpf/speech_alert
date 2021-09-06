@@ -43,7 +43,7 @@ def recognize_audio_forever(
     microphone = sr.Microphone(audio_device_index)
     with microphone as source:
         if calibrate:
-            print("Starting calibration. Remain silent and press ENTER: ")
+            input("\nStarting calibration. Remain silent and, when you are ready, press ENTER and wait: ")
             speech_recognizer.adjust_for_ambient_noise(source)
             print("\tCalibration Done.")
         print("\nNow you can start speaking. Recognized phrases will be shown below:\n")

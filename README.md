@@ -41,7 +41,7 @@ After setting the Bot Token and your User ID properly, when you run the program 
  
  - **Alert Message**: what the bot will send you when any keyword is detected from the live input audio
  
- - **Calibration**: to adjust the detection noise threshold for your microphone, enable this option and remain silent while calibrating
+ - **Calibration**: to adjust the detection noise threshold for your microphone, enable this option and don't speak while calibrating. It should take less than 5 seconds
 
  - **Maximum Phrase Duration**: each phrase being said is processed when the speaker stops talking for a brief moment or the maximum phrase duration is reached
 
